@@ -29,8 +29,120 @@ public class BaselineExample
         Collection<Token> tokens = JCasUtil.select(jcas, Token.class);
         System.out.println("CAS contains " + tokens.size() + " tokens.");
         
+        int deutschScore = 0; 
+        int englischScore = 0; 
+        int franzScore = 0;
+        
+        for (Token t : tokens) {
+        	if (t.getCoveredText().toLowerCase().equals("der")) {
+        		deutschScore++;
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("die")) {
+        		deutschScore++;
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("und")) {
+        		deutschScore++;
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("in")) {
+        		deutschScore++;
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("den")) {
+        		deutschScore++;
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("von")) {
+        		deutschScore++;
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("zu")) {
+        		deutschScore++;
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("das")) {
+        		deutschScore++;
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("mit")) {
+        		deutschScore++;
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("sich")) {
+        		deutschScore++;
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("the")) {
+        		englischScore++; 
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("be")) {
+        		englischScore++; 
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("to")) {
+        		englischScore++; 
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("of")) {
+        		englischScore++; 
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("and")) {
+        		englischScore++; 
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("a")) {
+        		englischScore++; 
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("in")) {
+        		englischScore++; 
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("that")) {
+        		englischScore++; 
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("have")) {
+        		englischScore++; 
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("i")) {
+        		englischScore++; 
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("le")) {
+        		franzScore++; 
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("de")) {
+        		franzScore++; 
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("un")) {
+        		franzScore++; 
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("a")) {
+        		franzScore++; 
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("etre")) {
+        		franzScore++; 
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("et")) {
+        		franzScore++; 
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("en")) {
+        		franzScore++; 
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("avoir")) {
+        		franzScore++; 
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("que")) {
+        		franzScore++; 
+        	}
+        	if (t.getCoveredText().toLowerCase().equals("pour")) {
+        		franzScore++; 
+        	}
+        	
+        }
+        
+        
         DetectedLanguage languageAnno = new DetectedLanguage(jcas);
-        languageAnno.setLanguage("EN");
+        
+        if (englischScore > deutschScore && englischScore > franzScore) {
+        	languageAnno.setLanguage("EN");
+        }
+        else if (deutschScore > englischScore && deutschScore > franzScore) {
+        	languageAnno.setLanguage("DE");
+        }
+        else if (franzScore > deutschScore && franzScore > englischScore) {
+        	languageAnno.setLanguage("FR");
+        }
+        else {
+        	languageAnno.setLanguage("EN");
+        }
+        
         languageAnno.addToIndexes();
     }
 }
