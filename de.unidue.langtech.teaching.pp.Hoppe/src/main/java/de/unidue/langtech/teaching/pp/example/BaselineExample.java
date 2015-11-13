@@ -34,11 +34,13 @@ public class BaselineExample
         int deutschScore = 0; 
         int englischScore = 0; 
         int franzScore = 0;
+        int spanischScore = 0; 
         
         try {
 			Set<String> wordsEN = Woerterbuch.erstelle("src/test/resources/test/woerterbuchEnglisch.txt");
 			Set<String> wordsDE = Woerterbuch.erstelle("src/test/resources/test/woerterbuchDeutsch.txt");
 			Set<String> wordsFR = Woerterbuch.erstelle("src/test/resources/test/woerterbuchFranz.txt");
+			Set<String> wordsES = Woerterbuch.erstelle("src/test/resources/test/woerterbuchSpanisch.txt");
 			for (Token t : tokens) {
 				for (String w : wordsEN) {
 					if(t.getCoveredText().toLowerCase().equals(w.toLowerCase())) {
@@ -55,125 +57,35 @@ public class BaselineExample
 						franzScore++; 
 					}
 				}
+				for (String w : wordsES) {
+					if(t.getCoveredText().toLowerCase().equals(w.toLowerCase())) {
+						spanischScore++; 
+					}
+				}
 			}
 				
         } catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-
-        
-        
-//        for (Token t : tokens) {
-//        	if (t.getCoveredText().toLowerCase().equals("der")) {
-//        		deutschScore++;
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("die")) {
-//        		deutschScore++;
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("und")) {
-//        		deutschScore++;
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("in")) {
-//        		deutschScore++;
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("den")) {
-//        		deutschScore++;
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("von")) {
-//        		deutschScore++;
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("zu")) {
-//        		deutschScore++;
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("das")) {
-//        		deutschScore++;
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("mit")) {
-//        		deutschScore++;
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("sich")) {
-//        		deutschScore++;
-//        	}
-        	
-        	
-//        	if (t.getCoveredText().toLowerCase().equals("the")) {
-//        		englischScore++; 
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("be")) {
-//        		englischScore++; 
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("to")) {
-//        		englischScore++; 
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("of")) {
-//        		englischScore++; 
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("and")) {
-//        		englischScore++; 
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("a")) {
-//        		englischScore++; 
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("in")) {
-//        		englischScore++; 
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("that")) {
-//        		englischScore++; 
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("have")) {
-//        		englischScore++; 
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("i")) {
-//        		englischScore++; 
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("le")) {
-//        		franzScore++; 
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("de")) {
-//        		franzScore++; 
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("un")) {
-//        		franzScore++; 
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("a")) {
-//        		franzScore++; 
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("etre")) {
-//        		franzScore++; 
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("et")) {
-//        		franzScore++; 
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("en")) {
-//        		franzScore++; 
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("avoir")) {
-//        		franzScore++; 
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("que")) {
-//        		franzScore++; 
-//        	}
-//        	if (t.getCoveredText().toLowerCase().equals("pour")) {
-//        		franzScore++; 
-//        	}
-//        	
-//        }
-        
         
         DetectedLanguage languageAnno = new DetectedLanguage(jcas);
         
-        if (englischScore > deutschScore && englischScore > franzScore) {
+        if (englischScore > deutschScore && englischScore > franzScore && englischScore > spanischScore) {
         	languageAnno.setLanguage("EN");
         	System.out.println ("Englisch Score: " + englischScore); 
         }
-        else if (deutschScore > englischScore && deutschScore > franzScore) {
+        else if (deutschScore > englischScore && deutschScore > franzScore && deutschScore > spanischScore) {
         	languageAnno.setLanguage("DE");
         	System.out.println ("Deutsche Score: " + deutschScore); 
         }
-        else if (franzScore > deutschScore && franzScore > englischScore) {
+        else if (franzScore > deutschScore && franzScore > englischScore && franzScore > spanischScore) {
         	languageAnno.setLanguage("FR");
         	System.out.println ("Franzoesisch Score: " + franzScore); 
+        }
+        else if (spanischScore > deutschScore && spanischScore > englischScore && spanischScore > franzScore) {
+        	languageAnno.setLanguage("ES");
+        	System.out.println ("Spanisch Score: " + spanischScore); 
         }
         else {
         	languageAnno.setLanguage("EN");
