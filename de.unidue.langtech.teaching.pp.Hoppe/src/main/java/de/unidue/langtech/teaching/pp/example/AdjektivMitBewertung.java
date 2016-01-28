@@ -4,17 +4,17 @@ package de.unidue.langtech.teaching.pp.example;
 public class AdjektivMitBewertung {
 	
 	private String wort; 
-	private String bewertung; 
+	private int bewertung; 
 	
 	public String getWort() {
 		return this.wort; 
 	}
 	
-	public String getBewertung() {
+	public int getBewertung() {
 		return this.bewertung; 
 	}
 	
-	public AdjektivMitBewertung(String wort, String bewertung) {
+	public AdjektivMitBewertung(String wort, int bewertung) {
 		this.wort = wort; 
 		this.bewertung = bewertung; 
 	}

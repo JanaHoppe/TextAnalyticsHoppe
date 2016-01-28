@@ -16,7 +16,7 @@ public class AdjektivWörterbuch {
 	    String[] parts = br.readLine().split("\t"); 
 	    
 	    String adjektiv = parts[0];
-	    String bewertung = parts[1]; 
+	    int bewertung = Integer.parseInt(parts[1]); 
 	    
 	   AdjektivMitBewertung next = new AdjektivMitBewertung(adjektiv, bewertung); 
 	    
@@ -29,7 +29,7 @@ public class AdjektivWörterbuch {
 	    	}
 	    	parts = br.readLine().split("\t"); 
 	    	adjektiv = parts[0]; 
-	    	bewertung = parts[1];
+	    	bewertung = Integer.parseInt(parts[1]);
 	    	next = new AdjektivMitBewertung(adjektiv, bewertung); 
 	    
 		}
