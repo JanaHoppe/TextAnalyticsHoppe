@@ -64,8 +64,6 @@ public class OpinionFinder extends JCasAnnotator_ImplBase{
         
         opinionFound.addToIndexes();
         
-        System.out.println(jcas.getDocumentText() + " " + opinionFound);
-        
     }
 	
 }
