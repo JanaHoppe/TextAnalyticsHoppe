@@ -20,7 +20,7 @@ public class OpinionFinderTest {
 	public void testOpinionFinder() throws UIMAException, ArrayIndexOutOfBoundsException{
 		
 		JCas jcas = JCasFactory.createJCas(); 
-		jcas.setDocumentText("One of my best 8th graders Kory was excited after his touchdown today!! He did the victor cruz!!lol http://t.co/tqORFrXB"); 
+		jcas.setDocumentText("Theo Walcott is still shit, watch Rafa and Johnny deal with him on Saturday."); 
 		//jcas.setDocumentLanguage("en");
 		
 		
@@ -35,7 +35,7 @@ public class OpinionFinderTest {
 		OpinionFinding opinionFound = JCasUtil.selectSingle(jcas, OpinionFinding.class); 
 		String result = opinionFound.getOpinionFound(); 
 		
-		assertEquals("positiv", result); 
+		assertEquals("negativ", result); 
 		
 	}
 	

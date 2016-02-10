@@ -17,48 +17,61 @@ public class OpinionFinder extends JCasAnnotator_ImplBase{
 	@Override
     public void process(JCas jcas)
         throws AnalysisEngineProcessException, ArrayIndexOutOfBoundsException
-    {
+        {
+		
 		//String documentText = jcas.getDocumentText();
 		
-		 System.out.println("Document is: " + jcas.getDocumentText());
-		
 		Collection<Token> tokens = JCasUtil.select(jcas, Token.class);
-        System.out.println("CAS contains " + tokens.size() + " tokens.");
+        //System.out.println("CAS contains " + tokens.size() + " tokens.");
         
         
         int positiv = 0; 
         int negativ = 0; 
-        	
-		//Set<AdjektivMitBewertung> words = AdjektivWörterbuch.erstelle("src/test/resources/test/AFINN-111.txt");
-		//Iterator iter = words.iterator(); 
         
         String[] words = WoerterbuchWoerter.erstelle("src/test/resources/test/AFINN-111.txt"); 
         int[] bewertung = WoerterbuchBewertung.erstelle("src/test/resources/test/AFINN-111.txt"); 
+        String[] smiley = WoerterbuchWoerter.erstelle("src/test/resources/test/Emoticons.txt"); 
+        int[] smileyBewertung = WoerterbuchBewertung.erstelle("src/test/resources/test/Emoticons.txt"); 
 			
-			 for (Token t : tokens) {
+		for (Token t : tokens) {
 				 
-		    	   for (int i=0; i < words.length; i++) {
+		    for (int i=0; i < words.length; i++) {
 		    		   
-		    		   if(words[i].equals(t.getCoveredText())) {
-							if (bewertung[i] > 0) {
-								positiv+=bewertung[i]; 
-							}
-							if (bewertung[i] < 0) {
-								negativ+=bewertung[i]; 
-							}
-						}
-		    	   }
-		       }
+		    	if(words[i].equals(t.getCoveredText())) {
+					if (bewertung[i] > 0) {
+						positiv+=bewertung[i]; 
+					}
+					if (bewertung[i] < 0) {
+						negativ+=bewertung[i]; 
+					}
+		    	}
+		    }
+		    
+		    for (int j = 0; j < smiley.length; j++) {
+		    	
+		    	if(smiley[j].equals(t.getCoveredText())) {
+		    		
+		    		if (smileyBewertung[j] > 0) {
+		    			positiv+=smileyBewertung[j]; 
+		    		}
+		    		if (smileyBewertung[j] < 0) {
+		    			negativ+=smileyBewertung[j]; 
+		    		}
+		    	}
+		    }
+		}
 			
 		OpinionFinding opinionFound = new OpinionFinding (jcas);
+		
+		int gesamt = positiv+negativ; 
         
-        if (Math.abs(positiv) > Math.abs(negativ)) {
+        if (gesamt > 1) {
         	opinionFound.setOpinionFound("positiv");
         } 
-        else if (Math.abs(negativ) > Math.abs(positiv)) {
-        	opinionFound.setOpinionFound("negativ"); 
+        else if (gesamt < -1.5f) {
+        	opinionFound.setOpinionFound("negativ");
         }
-        else if (Math.abs(positiv) == Math.abs(negativ)) {
+        else {
         	opinionFound.setOpinionFound("neutral");
         }
         

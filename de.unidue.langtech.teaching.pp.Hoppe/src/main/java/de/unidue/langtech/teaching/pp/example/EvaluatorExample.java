@@ -1,5 +1,7 @@
 package de.unidue.langtech.teaching.pp.example;
 
+import java.util.Collection;
+
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
@@ -7,8 +9,10 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.unidu.langtech.pp.teaching.type.OpinionFinding;
 import de.unidue.langtech.teaching.pp.type.DetectedLanguage;
 import de.unidue.langtech.teaching.pp.type.GoldLanguage;
+import de.unidue.langtech.teaching.pp.type.TweetOpinion;
 
 public class EvaluatorExample
     extends JCasAnnotator_ImplBase
@@ -16,6 +20,22 @@ public class EvaluatorExample
 
     private int correct;
     private int nrOfDocuments;
+    private int positiv; 
+    private int negativ; 
+    private int neutral; 
+    private float percent; 
+    
+    private int correctPositiv; 
+    private int falseNegativPositiv; 
+    private int falseNeutralPositiv; 
+    
+    private int correctNegativ; 
+    private int falsePositivNegativ; 
+    private int falseNeutralNegativ; 
+    
+    private int correctNeutral; 
+    private int falsePositivNeutral; 
+    private int falseNegativNeutral; 
     
     /* 
      * This is called BEFORE any documents are processed.
@@ -27,6 +47,22 @@ public class EvaluatorExample
         super.initialize(context);
         correct = 0;
         nrOfDocuments = 0;
+        positiv = 0; 
+        negativ = 0; 
+        neutral = 0; 
+        percent = 0;
+        
+        correctPositiv = 0; 
+        falseNegativPositiv = 0; 
+        falseNeutralPositiv = 0;
+        
+        correctNegativ = 0; 
+        falsePositivNegativ = 0; 
+        falseNeutralNegativ = 0; 
+        
+        correctNeutral = 0; 
+        falsePositivNeutral = 0; 
+        falseNegativNeutral = 0; 
     }
     
     
@@ -38,10 +74,40 @@ public class EvaluatorExample
         throws AnalysisEngineProcessException
     {
         
-        DetectedLanguage detected = JCasUtil.selectSingle(jcas, DetectedLanguage.class);
-        GoldLanguage actual = JCasUtil.selectSingle(jcas, GoldLanguage.class);
-
-        System.out.println(actual.getLanguage() + " detected as " + detected.getLanguage());
+    	OpinionFinding detected = JCasUtil.selectSingle(jcas, OpinionFinding.class);
+        TweetOpinion actual = JCasUtil.selectSingle(jcas, TweetOpinion.class);
+        
+        if (detected.getOpinionFound().equals(actual.getOpinion())) {
+    		correct+=1; 
+    	}
+        
+        if(detected.getOpinionFound().equals("positiv")) {
+    		positiv+=1; 
+    		switch(actual.getOpinion()) {
+    		case "positive": correctPositiv++; break; 
+    		case "negative": falseNegativPositiv++; break; 
+    		case "neutral": falseNeutralPositiv++; break; 
+    		}
+    	}
+    	else if(detected.getOpinionFound().equals("negativ")) {
+    		negativ+=1; 
+    		switch(actual.getOpinion()) {
+    		case "positive": falsePositivNegativ++; break; 
+    		case "negative": correctNegativ++; break;
+    		case "neutral": falseNeutralNegativ++; break; 
+    		}
+    	}
+    	else if(detected.getOpinionFound().equals("neutral")) {
+    		neutral+=1; 
+    		switch(actual.getOpinion()) {
+    		case "positive": falsePositivNeutral++; break;
+    		case "negative": falseNegativNeutral++; break; 
+    		case "neutral": correctNeutral++; break; 
+ 
+    		}
+    	}
+        
+        nrOfDocuments++; 
         
         // FIXME: Keep track of correctly classified documents! 
     }
@@ -56,6 +122,15 @@ public class EvaluatorExample
     {
         super.collectionProcessComplete();
         
+        percent = (float) correct/(float) nrOfDocuments*100f; 
+        
         System.out.println(correct + " out of " + nrOfDocuments + " are correct.");
+        System.out.println("Dies sind " + percent + " % aller Tweets.");
+        System.out.println("Es wurden " + positiv + " als positiv erkannt");
+        System.out.println("Davon wurden " + correctPositiv + " richtigerweise als positiv erkannt, " + falseNegativPositiv + " waren eigentlich negativ und " + falseNeutralPositiv + " waren eigentlich neutral");
+        System.out.println("Es wurden " + negativ + " als negativ erkannt");
+        System.out.println("Davon wurden " + correctNegativ + " richtigerweise als negativ erkannt, " + falsePositivNegativ + " waren eigentlich positiv und " + falseNeutralNegativ + " waren eigentlich neutral");
+        System.out.println("Es wurden " + neutral + " als neutral erkannt");
+        System.out.println("Davon wurden " + correctNeutral + " richtigerweise als neutral erkannt, " + falsePositivNeutral + " waren eigentlich positiv und " + falseNegativNeutral + " waren eigentlich negativ");
     }
 }
