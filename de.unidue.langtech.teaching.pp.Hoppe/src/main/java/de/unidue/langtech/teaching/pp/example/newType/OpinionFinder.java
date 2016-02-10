@@ -9,7 +9,11 @@ import org.apache.uima.jcas.JCas;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.unidu.langtech.pp.teaching.type.OpinionFinding;
 import de.unidue.langtech.teaching.pp.example.WoerterbuchBewertung;
+import de.unidue.langtech.teaching.pp.example.WoerterbuchBewertung2;
+import de.unidue.langtech.teaching.pp.example.WoerterbuchBewertung3;
+import de.unidue.langtech.teaching.pp.example.WoerterbuchStärke;
 import de.unidue.langtech.teaching.pp.example.WoerterbuchWoerter;
+import de.unidue.langtech.teaching.pp.example.WoerterbuchWoerter2;
 
 
 public class OpinionFinder extends JCasAnnotator_ImplBase{
@@ -32,7 +36,11 @@ public class OpinionFinder extends JCasAnnotator_ImplBase{
         int[] bewertung = WoerterbuchBewertung.erstelle("src/test/resources/test/AFINN-111.txt"); 
         String[] smiley = WoerterbuchWoerter.erstelle("src/test/resources/test/Emoticons.txt"); 
         int[] smileyBewertung = WoerterbuchBewertung.erstelle("src/test/resources/test/Emoticons.txt"); 
-			
+        //String[] words2 = WoerterbuchWoerter2.erstelle("src/test/resources/test/subjclueslen1-HLTEMNLP05.txt"); 
+        //int[] bewertung2 = WoerterbuchBewertung3.erstelle(); 
+        //String[] bewertung2 = WoerterbuchBewertung2.erstelle("src/test/resources/test/subjclueslen1-HLTEMNLP05.txt");
+        //String[] staerke = WoerterbuchStärke.erstelle("src/test/resources/test/subjclueslen1-HLTEMNLP05.txt");
+   
 		for (Token t : tokens) {
 				 
 		    for (int i=0; i < words.length; i++) {
@@ -59,6 +67,22 @@ public class OpinionFinder extends JCasAnnotator_ImplBase{
 		    		}
 		    	}
 		    }
+		    //for (int f = 0; f < words.length; f++) {
+		    	//for (int a = 0; a < words2.length; a++) {
+		    		//if(words[f].equals(words2[a])) {
+		    			//Tut nichts
+		    		//} else {
+		    			   //if(words2[f].equals(t.getCoveredText())) {
+							//if (bewertung2[f] > 0) {
+								//positiv+=bewertung2[f]; 
+							//}
+							//if (bewertung2[f] < 0) {
+								//negativ+=bewertung2[f]; 
+							//}
+				    	//}
+		    		//}
+		    	//}
+		    //}
 		}
 			
 		OpinionFinding opinionFound = new OpinionFinding (jcas);

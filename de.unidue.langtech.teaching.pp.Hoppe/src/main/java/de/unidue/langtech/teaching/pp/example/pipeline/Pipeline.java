@@ -10,7 +10,6 @@ import de.tudarmstadt.ukp.dkpro.core.snowball.SnowballStemmer;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 import de.unidue.langtech.teaching.pp.example.EvaluatorExample;
 import de.unidue.langtech.teaching.pp.example.newType.OpinionFinder;
-import de.unidue.langtech.teaching.pp.example.newType.PrinterTwitter;
 import de.unidue.langtech.teaching.pp.example.pipeline.Reader_Twitter;
 
 public class Pipeline {

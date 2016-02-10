@@ -1,6 +1,6 @@
 package de.unidue.langtech.teaching.pp.example;
 
-import java.util.Collection;
+
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -10,8 +10,6 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.unidu.langtech.pp.teaching.type.OpinionFinding;
-import de.unidue.langtech.teaching.pp.type.DetectedLanguage;
-import de.unidue.langtech.teaching.pp.type.GoldLanguage;
 import de.unidue.langtech.teaching.pp.type.TweetOpinion;
 
 public class EvaluatorExample
