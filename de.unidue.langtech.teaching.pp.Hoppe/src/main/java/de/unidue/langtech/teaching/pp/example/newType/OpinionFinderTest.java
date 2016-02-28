@@ -27,15 +27,22 @@ public class OpinionFinderTest {
 		AnalysisEngine tok = AnalysisEngineFactory.createEngine(BreakIteratorSegmenter.class);
 		tok.process(jcas.getCas());
 		
+		AnalysisEngineDescription opinionScore1 = AnalysisEngineFactory.createEngineDescription(ScoreDetector1.class); 
+		AnalysisEngine letEngine = AnalysisEngineFactory.createEngine(opinionScore1); 
+		letEngine.process(jcas);
+		
+		AnalysisEngineDescription opinionScore2 = AnalysisEngineFactory.createEngineDescription(ScoreDetector2.class); 
+		AnalysisEngine letEngine1 = AnalysisEngineFactory.createEngine(opinionScore2); 
+		letEngine1.process(jcas);
 		
 		AnalysisEngineDescription opinionFinder = AnalysisEngineFactory.createEngineDescription(OpinionFinder.class); 
-		AnalysisEngine letEngine = AnalysisEngineFactory.createEngine(opinionFinder); 
-		letEngine.process(jcas); 
+		AnalysisEngine letEngine2 = AnalysisEngineFactory.createEngine(opinionFinder); 
+		letEngine2.process(jcas); 
 		
 		OpinionFinding opinionFound = JCasUtil.selectSingle(jcas, OpinionFinding.class); 
 		String result = opinionFound.getOpinionFound(); 
 		
-		assertEquals("negativ", result); 
+		assertEquals("negative", result); 
 		
 	}
 	

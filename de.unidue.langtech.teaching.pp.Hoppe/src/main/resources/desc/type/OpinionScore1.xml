@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>OpinionScore1</name>
+  <description/>
+  <version/>
+  <vendor/>
+  <types>
+    <typeDescription>
+      <name>de.unidu.langtech.pp.teaching.type.OpinionScore1</name>
+      <description/>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>opinionScore</name>
+          <description>Speichert die gefundenden und aufaddierten Werte des ersten Wörterbuchs.</description>
+          <rangeTypeName>uima.cas.Float</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>

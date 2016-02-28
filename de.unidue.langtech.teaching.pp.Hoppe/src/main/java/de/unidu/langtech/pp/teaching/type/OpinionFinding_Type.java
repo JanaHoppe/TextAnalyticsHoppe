@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Thu Jan 07 21:16:38 CET 2016
+ * Updated by JCasGen Sun Feb 28 13:07:08 CET 2016
  * @generated */
 public class OpinionFinding_Type extends Annotation_Type {
   /** @generated 

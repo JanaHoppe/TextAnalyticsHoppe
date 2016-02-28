@@ -76,10 +76,10 @@ public class EvaluatorExample
         TweetOpinion actual = JCasUtil.selectSingle(jcas, TweetOpinion.class);
         
         if (detected.getOpinionFound().equals(actual.getOpinion())) {
-    		correct+=1; 
+    		correct++; 
     	}
         
-        if(detected.getOpinionFound().equals("positiv")) {
+        if(detected.getOpinionFound().equals("positive")) {
     		positiv+=1; 
     		switch(actual.getOpinion()) {
     		case "positive": correctPositiv++; break; 
@@ -87,7 +87,7 @@ public class EvaluatorExample
     		case "neutral": falseNeutralPositiv++; break; 
     		}
     	}
-    	else if(detected.getOpinionFound().equals("negativ")) {
+    	else if(detected.getOpinionFound().equals("negative")) {
     		negativ+=1; 
     		switch(actual.getOpinion()) {
     		case "positive": falsePositivNegativ++; break; 
