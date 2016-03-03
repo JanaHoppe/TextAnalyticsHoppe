@@ -19,7 +19,7 @@ public class Pipeline {
 	        SimplePipeline.runPipeline(
 	                CollectionReaderFactory.createReader(
 	                		Reader_Twitter.class, 
-	                        Reader_Twitter.PARAM_INPUT_FILE, "src/test/resources/test/Trainingsdata+Devdata-SemEval2013.txt"
+	                        Reader_Twitter.PARAM_INPUT_FILE, "src/test/resources/test/Daten.txt"
 	                ),
 	         
 	         

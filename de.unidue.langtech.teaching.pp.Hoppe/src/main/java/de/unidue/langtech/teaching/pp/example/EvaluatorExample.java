@@ -16,6 +16,22 @@ public class EvaluatorExample
     extends JCasAnnotator_ImplBase
 {
 
+	private int actualPos; 
+	private int actualNeg; 
+	private int actualNeu; 
+	
+	private float precisionPos; 
+	private float recallPos;
+	private float measurePos;
+	
+	private float precisionNeg; 
+	private float recallNeg;
+	private float measureNeg;
+	
+	private float precisionNeu; 
+	private float recallNeu;
+	private float measureNeu;
+	
     private int correct;
     private int nrOfDocuments;
     private int positiv; 
@@ -35,14 +51,28 @@ public class EvaluatorExample
     private int falsePositivNeutral; 
     private int falseNegativNeutral; 
     
-    /* 
-     * This is called BEFORE any documents are processed.
-     */
     @Override
     public void initialize(UimaContext context)
         throws ResourceInitializationException
     {
         super.initialize(context);
+        
+        actualPos = 0; 
+        actualNeg = 0; 
+        actualNeu = 0; 
+        
+        precisionPos = 0; 
+    	recallPos = 0;
+    	measurePos = 0;
+    	
+    	precisionNeg = 0; 
+    	recallNeg = 0;
+    	measureNeg = 0;
+    	
+    	precisionNeu = 0; 
+    	recallNeu = 0;
+    	measureNeu = 0;
+        
         correct = 0;
         nrOfDocuments = 0;
         positiv = 0; 
@@ -63,10 +93,6 @@ public class EvaluatorExample
         falseNegativNeutral = 0; 
     }
     
-    
-    /* 
-     * This is called ONCE for each document
-     */
     @Override
     public void process(JCas jcas)
         throws AnalysisEngineProcessException
@@ -74,6 +100,16 @@ public class EvaluatorExample
         
     	OpinionFinding detected = JCasUtil.selectSingle(jcas, OpinionFinding.class);
         TweetOpinion actual = JCasUtil.selectSingle(jcas, TweetOpinion.class);
+        
+        if (actual.getOpinion().equals("positive")) {
+        	actualPos++; 
+        }
+        else if (actual.getOpinion().equals("negative")) {
+        	actualNeg++; 
+        }
+        else if (actual.getOpinion().equals("neutral")) {
+        	actualNeu++; 
+        }
         
         if (detected.getOpinionFound().equals(actual.getOpinion())) {
     		correct++; 
@@ -106,29 +142,47 @@ public class EvaluatorExample
     	}
         
         nrOfDocuments++; 
-        
-        // FIXME: Keep track of correctly classified documents! 
     }
 
-
-    /* 
-     * This is called AFTER all documents have been processed.
-     */
     @Override
     public void collectionProcessComplete()
         throws AnalysisEngineProcessException
     {
         super.collectionProcessComplete();
         
+        precisionPos = (float) correctPositiv / ( (float) correctPositiv + (float) falseNegativPositiv +  (float) falseNeutralPositiv) * 100; 
+    	recallPos = (float) correctPositiv / ( (float) correctPositiv + ( (float) actualPos - (float) correctPositiv)) * 100;
+    	measurePos = (2 * precisionPos * recallPos) / (precisionPos + recallPos);
+    	
+    	precisionNeg = (float) correctNegativ / ( (float) correctNegativ + (float) falsePositivNegativ + (float) falseNeutralNegativ) * 100; 
+    	recallNeg = (float) correctNegativ / ( (float) correctNegativ + ( (float) actualNeg - (float) correctNegativ)) * 100;
+    	measureNeg = (2 * precisionNeg * recallNeg) / (precisionNeg + recallNeg);
+    	
+    	precisionNeu = (float) correctNeutral / ( (float) correctNeutral + (float) falseNegativNeutral + (float) falsePositivNeutral) * 100; 
+    	recallNeu = (float) correctNeutral / ( (float) correctNeutral + ( (float) actualNeu - (float) correctNeutral)) * 100;
+    	measureNeu = (2 * precisionNeu * recallNeu) / (precisionNeu + recallNeu);
+        
         percent = (float) correct/(float) nrOfDocuments*100f; 
         
-        System.out.println(correct + " out of " + nrOfDocuments + " are correct.");
+        System.out.println("Die Trainingsdaten umfassen " + nrOfDocuments + " Tweets.");
+        System.out.println("Von diesen sind " + actualPos + " positive Tweets, " + actualNeg + " negative Tweets und " + actualNeu + " neutrale Tweets.");
+        System.out.println(" ");
+        System.out.println(" ");
+        System.out.println("Die Berechnung mit diesem Programm ergab folgende Ergebnisse:"); 
+        System.out.println(" ");
+        System.out.println("Von den " + nrOfDocuments + " wurden " + correct + " richtig erkannt.");
         System.out.println("Dies sind " + percent + " % aller Tweets.");
+        System.out.println(" ");
         System.out.println("Es wurden " + positiv + " als positiv erkannt");
         System.out.println("Davon wurden " + correctPositiv + " richtigerweise als positiv erkannt, " + falseNegativPositiv + " waren eigentlich negativ und " + falseNeutralPositiv + " waren eigentlich neutral");
+        System.out.println("Precision: " + precisionPos + " %, Recall: " + recallPos + " %, F-Measure: " + measurePos + " %."); 
+        System.out.println(" ");
         System.out.println("Es wurden " + negativ + " als negativ erkannt");
         System.out.println("Davon wurden " + correctNegativ + " richtigerweise als negativ erkannt, " + falsePositivNegativ + " waren eigentlich positiv und " + falseNeutralNegativ + " waren eigentlich neutral");
+        System.out.println("Precision: " + precisionNeg + " %, Recall: " + recallNeg + " %, F-Measure: " + measureNeg + " %."); 
+        System.out.println(" ");
         System.out.println("Es wurden " + neutral + " als neutral erkannt");
         System.out.println("Davon wurden " + correctNeutral + " richtigerweise als neutral erkannt, " + falsePositivNeutral + " waren eigentlich positiv und " + falseNegativNeutral + " waren eigentlich negativ");
+        System.out.println("Precision: " + precisionNeu + " %, Recall: " + recallNeu + " %, F-Measure: " + measureNeu + " %."); 
     }
 }
