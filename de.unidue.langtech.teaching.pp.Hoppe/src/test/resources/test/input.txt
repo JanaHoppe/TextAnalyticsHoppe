@@ -1,6 +1,0 @@
-EN#Peter went into the office before they arrived there
-FR#Si tu finis tes devoirs, je te donnerai des bonbons
-DE#Das ist ein schon recht langes deutsches Beispiel
-ES#Se puede utilizar un calendario anual para crear o modificar registros para todo un año en una sola pantalla.
-NLD#Alle ding laat zich zeggen, en kaas en brood laten zich eten.
-IT#Le autorità hanno presentato alla Commissione, come informazioni supplementari, un’ intera serie di documenti e studi sul progetto originale e sulla sua possibile incidenza sui valori naturali.

@@ -21,7 +21,6 @@ public class OpinionFinderTest {
 		
 		JCas jcas = JCasFactory.createJCas(); 
 		jcas.setDocumentText("Theo Walcott is still shit, watch Rafa and Johnny deal with him on Saturday."); 
-		//jcas.setDocumentLanguage("en");
 		
 		
 		AnalysisEngine tok = AnalysisEngineFactory.createEngine(BreakIteratorSegmenter.class);

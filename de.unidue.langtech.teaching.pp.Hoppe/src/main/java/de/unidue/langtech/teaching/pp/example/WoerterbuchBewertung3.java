@@ -28,8 +28,6 @@ public class WoerterbuchBewertung3 {
 				}
 			}
 			
-		
-			
 			return bewertungArray; 
 		
 	}
