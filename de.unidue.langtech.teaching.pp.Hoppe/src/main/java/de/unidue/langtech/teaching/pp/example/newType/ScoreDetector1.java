@@ -10,7 +10,6 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.unidu.langtech.pp.teaching.type.OpinionFinding;
 import de.unidu.langtech.pp.teaching.type.OpinionScore1;
 import de.unidue.langtech.teaching.pp.example.WoerterbuchBewertung;
 import de.unidue.langtech.teaching.pp.example.WoerterbuchWoerter;

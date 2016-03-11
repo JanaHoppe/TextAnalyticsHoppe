@@ -11,19 +11,19 @@ public class WoerterbuchBewertung3 {
 			
 			for (int i = 0; i < bewertungArray.length; i++) { 
 				
-				if (bewertung2[i] == "positive" && staerke[i] == "strongsubj") {
-					bewertungArray[i]=4; 
+				if ((bewertung2[i].equals("positive")) && (staerke[i].equals("strongsubj"))) {
+					bewertungArray[i]=2; 
 				} 
-				else if (bewertung2[i] == "positive" && staerke[i] == "weaksubj") {
+				else if ((bewertung2[i].equals("positive")) && (staerke[i].equals("weaksubj"))) {
 					bewertungArray[i]=1; 
 				} 
-				else if (bewertung2[i] == "negative" && staerke[i] == "strongsubj") {
-					bewertungArray[i]=-4; 
+				else if ((bewertung2[i].equals("negative")) && (staerke[i].equals("strongsubj"))) {
+					bewertungArray[i]=-2; 
 				} 
-				else if (bewertung2[i] == "negative" && staerke[i] == "weaksubj") {
+				else if ((bewertung2[i].equals("negative")) && (staerke[i].equals("weaksubj"))) {
 					bewertungArray[i]=-1; 
 				} 
-				else if (bewertung2[i] == "neutral") {
+				else if (bewertung2[i].equals("neutral")) {
 					bewertungArray[i]=0; 
 				}
 			}
