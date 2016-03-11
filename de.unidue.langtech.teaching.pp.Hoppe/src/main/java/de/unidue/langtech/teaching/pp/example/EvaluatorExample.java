@@ -166,21 +166,16 @@ public class EvaluatorExample
         
         System.out.println("Die Trainingsdaten umfassen " + nrOfDocuments + " Tweets.");
         System.out.println("Von diesen sind " + actualPos + " positive Tweets, " + actualNeg + " negative Tweets und " + actualNeu + " neutrale Tweets.");
-        System.out.println(" ");
-        System.out.println(" ");
-        System.out.println("Die Berechnung mit diesem Programm ergab folgende Ergebnisse:"); 
-        System.out.println(" ");
+        System.out.println("-------------------------------------------------------------------------------------" + "\n");
+        System.out.println("Die Berechnung mit diesem Programm ergab folgende Ergebnisse:" + "\n"); 
         System.out.println("Von den " + nrOfDocuments + " wurden " + correct + " richtig erkannt.");
-        System.out.println("Dies sind " + percent + " % aller Tweets.");
-        System.out.println(" ");
+        System.out.println("Dies sind " + percent + " % aller Tweets." + "\n");
         System.out.println("Es wurden " + positiv + " als positiv erkannt");
         System.out.println("Davon wurden " + correctPositiv + " richtigerweise als positiv erkannt, " + falseNegativPositiv + " waren eigentlich negativ und " + falseNeutralPositiv + " waren eigentlich neutral");
-        System.out.println("Precision: " + precisionPos + " %, Recall: " + recallPos + " %, F-Measure: " + measurePos + " %."); 
-        System.out.println(" ");
+        System.out.println("Precision: " + precisionPos + " %, Recall: " + recallPos + " %, F-Measure: " + measurePos + " %." + "\n"); 
         System.out.println("Es wurden " + negativ + " als negativ erkannt");
         System.out.println("Davon wurden " + correctNegativ + " richtigerweise als negativ erkannt, " + falsePositivNegativ + " waren eigentlich positiv und " + falseNeutralNegativ + " waren eigentlich neutral");
-        System.out.println("Precision: " + precisionNeg + " %, Recall: " + recallNeg + " %, F-Measure: " + measureNeg + " %."); 
-        System.out.println(" ");
+        System.out.println("Precision: " + precisionNeg + " %, Recall: " + recallNeg + " %, F-Measure: " + measureNeg + " %." + "\n"); 
         System.out.println("Es wurden " + neutral + " als neutral erkannt");
         System.out.println("Davon wurden " + correctNeutral + " richtigerweise als neutral erkannt, " + falsePositivNeutral + " waren eigentlich positiv und " + falseNegativNeutral + " waren eigentlich negativ");
         System.out.println("Precision: " + precisionNeu + " %, Recall: " + recallNeu + " %, F-Measure: " + measureNeu + " %."); 
