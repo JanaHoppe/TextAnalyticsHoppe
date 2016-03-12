@@ -18,7 +18,7 @@ public class WoerterbuchBewertung3 {
 					bewertungArray[i]=1; 
 				} 
 				else if ((bewertung2[i].equals("negative")) && (staerke[i].equals("strongsubj"))) {
-					bewertungArray[i]=-2; 
+					bewertungArray[i]=-3; 
 				} 
 				else if ((bewertung2[i].equals("negative")) && (staerke[i].equals("weaksubj"))) {
 					bewertungArray[i]=-1; 

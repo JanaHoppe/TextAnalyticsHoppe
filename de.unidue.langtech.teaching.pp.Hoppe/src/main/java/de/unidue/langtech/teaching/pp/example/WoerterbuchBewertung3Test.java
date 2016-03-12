@@ -13,7 +13,7 @@ public class WoerterbuchBewertung3Test {
 		int a = 0; 
 		int b = 1; 
 		int c = 2; 
-		int d= -2; 
+		int d= -3; 
 		int i = -1; 
 		
 		assertEquals(i, bewertung[0]);
