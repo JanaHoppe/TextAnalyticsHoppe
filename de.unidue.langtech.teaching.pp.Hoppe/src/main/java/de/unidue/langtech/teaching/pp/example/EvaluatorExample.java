@@ -151,15 +151,15 @@ public class EvaluatorExample
         super.collectionProcessComplete();
         
         precisionPos = (float) correctPositiv / ( (float) correctPositiv + (float) falseNegativPositiv +  (float) falseNeutralPositiv) * 100; 
-    	recallPos = (float) correctPositiv / ( (float) correctPositiv + ( (float) actualPos - (float) correctPositiv)) * 100;
+    	recallPos = ((float) correctPositiv / (float) actualPos) * 100;
     	measurePos = (2 * precisionPos * recallPos) / (precisionPos + recallPos);
     	
     	precisionNeg = (float) correctNegativ / ( (float) correctNegativ + (float) falsePositivNegativ + (float) falseNeutralNegativ) * 100; 
-    	recallNeg = (float) correctNegativ / ( (float) correctNegativ + ( (float) actualNeg - (float) correctNegativ)) * 100;
+    	recallNeg = ((float) correctNegativ / (float) actualNeg) * 100;
     	measureNeg = (2 * precisionNeg * recallNeg) / (precisionNeg + recallNeg);
     	
     	precisionNeu = (float) correctNeutral / ( (float) correctNeutral + (float) falseNegativNeutral + (float) falsePositivNeutral) * 100; 
-    	recallNeu = (float) correctNeutral / ( (float) correctNeutral + ( (float) actualNeu - (float) correctNeutral)) * 100;
+    	recallNeu = ((float) correctNeutral / (float) actualNeu) * 100;
     	measureNeu = (2 * precisionNeu * recallNeu) / (precisionNeu + recallNeu);
         
         percent = (float) correct/(float) nrOfDocuments*100f; 
