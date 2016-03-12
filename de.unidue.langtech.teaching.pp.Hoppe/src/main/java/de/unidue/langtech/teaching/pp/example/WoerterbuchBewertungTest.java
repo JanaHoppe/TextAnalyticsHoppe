@@ -11,9 +11,12 @@ public class WoerterbuchBewertungTest {
 		
 		int[] words = WoerterbuchBewertung.erstelle("src/test/resources/test/AFINN-111.txt"); 
 		int s = -2;
-		int i = 0; 
+		int a = 1; 
+		int b = -4;
 		
-		assertEquals(s, words[i]); 
+		assertEquals(s, words[0]); 
+		assertEquals(a, words[42]);
+		assertEquals(b, words[182]);
 		
 	}
 

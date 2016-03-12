@@ -11,9 +11,12 @@ public class WoerterbuchBewertung2Test {
 		
 		String[] words = WoerterbuchBewertung2.erstelle("src/test/resources/test/subjclueslen1-HLTEMNLP05.txt"); 
 		String s = "negative";
-		int i = 0; 
+		String a = "positive"; 
+		String b = "neutral"; 
 		
-		assertEquals(s, words[i]); 
+		assertEquals(s, words[0]);
+		assertEquals(a, words[18]); 
+		assertEquals(b, words[45]); 
 		
 	}
 

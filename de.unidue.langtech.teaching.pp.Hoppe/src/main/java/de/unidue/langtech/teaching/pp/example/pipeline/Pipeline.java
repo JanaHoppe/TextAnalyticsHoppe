@@ -6,6 +6,7 @@ import org.apache.uima.fit.pipeline.SimplePipeline;
 
 import de.tudarmstadt.ukp.dkpro.core.arktools.ArktweetTokenizer;
 import de.unidue.langtech.teaching.pp.example.EvaluatorExample;
+import de.unidue.langtech.teaching.pp.example.newType.Baseline;
 import de.unidue.langtech.teaching.pp.example.newType.OpinionFinder;
 import de.unidue.langtech.teaching.pp.example.newType.ScoreDetector1;
 import de.unidue.langtech.teaching.pp.example.newType.ScoreDetector2;
@@ -24,6 +25,7 @@ public class Pipeline {
 	         
 	         
 	                AnalysisEngineFactory.createEngineDescription(ArktweetTokenizer.class),
+	                //AnalysisEngineFactory.createEngineDescription(Baseline.class),
 	                AnalysisEngineFactory.createEngineDescription(ScoreDetector1.class),
 	                AnalysisEngineFactory.createEngineDescription(ScoreDetector2.class),
 	                AnalysisEngineFactory.createEngineDescription(OpinionFinder.class),

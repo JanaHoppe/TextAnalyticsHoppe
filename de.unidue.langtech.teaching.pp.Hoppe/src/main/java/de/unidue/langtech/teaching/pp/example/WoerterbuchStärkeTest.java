@@ -11,9 +11,10 @@ public class WoerterbuchStärkeTest {
 		
 		String[] words = WoerterbuchStärke.erstelle("src/test/resources/test/subjclueslen1-HLTEMNLP05.txt"); 
 		String s = "weaksubj";
-		int i = 0; 
+		String i = "strongsubj";  
 		
-		assertEquals(s, words[i]); 
+		assertEquals(s, words[0]); 
+		assertEquals(i, words[22]);
 		
 	}
 

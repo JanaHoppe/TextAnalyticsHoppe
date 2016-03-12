@@ -13,9 +13,12 @@ public class WoeterbuchWoerterTest {
 		
 		String[] words = WoerterbuchWoerter.erstelle("src/test/resources/test/AFINN-111.txt"); 
 		String s = "abandon";
-		int i = 0; 
+		String a = "discord"; 
+		String b = "inquisitive"; 
 		
-		assertEquals(s, words[i]); 
+		assertEquals(s, words[0]); 
+		assertEquals(a, words[693]); 
+		assertEquals(b, words[1314]); 
 
 	}
 
